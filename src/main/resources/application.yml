@@ -1,0 +1,8 @@
+server:  port: 9000 custom:  gateway:    expose-unsecured-urls: true    unsecured-urls:    - /api/v1/welcome/unsecured-hello    spring:  security:    oauth2:      resourceserver:        jwt:          jwk-set-uri: https://dev-85970669.okta.com/oauth2/default/v1/keys
+  cloud:
+    gateway:
+      routes:
+        - id: welcome-service
+          uri: http://localhost:8080
+          predicates: 
+            - Path=/api/v1/welcome/**            logging:  level:    org.springframework.cloud.gateway: TRACE    org.springframework.security: TRACE    org.springframework.security.web: TRACE    org.springframework.security.oauth2: TRACE    org.springframework.security.oauth2.server: TRACE    org.springframework.security.oauth2.client: TRACE    org.springframework.web.HttpLogging: TRACE
